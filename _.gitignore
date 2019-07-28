@@ -1,0 +1,58 @@
+## Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+*.blg
+*.bbl
+
+## Build tool auxiliary files:
+*.fdb_latexmk
+*.synctex
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+
+# beamer
+*.nav
+*.snm
+*.vrb
+
+# OSX stuff
+.DS_Store
+
+# PDFs
+*.pdf
+
+##Eclipse
+.cproject
+.project
+.settings
+
+.gitignore
+
+#CLion
+.idea
+
+#CMake
+cmake-build-debug/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+
+#GTest
+gmock.pc
+gmock_main.pc
+gtest.pc
+gtest_main.pc
+googletest-master/
+
+# Visual Studio Code
+.vscode
