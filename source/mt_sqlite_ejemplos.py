@@ -1,28 +1,35 @@
 #https://www.pythoncentral.io/introductory-tutorial-python-sqlalchemy/
-from mt_sqlite_poo import *
-
-
-# CONFIGURAR NOMBRE DE LA BASE DE DATOS ######
-DBName  = "example.db"
-##############################################
+#from mt_sqlite import *     # import la librería
 
 ## INSTANCIA ------------------------------------------------------
-db = DBSqlite(DBName)
+#from mt_sqlite import *     # import la librería
+#DBName  = "example.db"      # Nombre de la base de datos
+#db = DBSqlite(DBName)       # Instancia de la clase
 ##  ---------------------------------------------------------------
 
 
-## EJECUTAR SCRIPT ------------------------------------------------
-#db.execScriptFromFile("example_script.sql")
-#print(db.error)
-##  -----------------------------------------------------------------
+### EJECUTAR SCRIPT ------------------------------------------------
+#from mt_sqlite import *           # import la librería
+#DBName  = "example.db"            # Nombre de la base de datos
+#db = DBSqlite(DBName)             # Instancia de la clase
+#db.execScriptFromFile("example_script.sql")  # Ejecutar script
+#print(db.error)                   # Imprimir error
+###  -----------------------------------------------------------------
 
-## OBTENER SCHEMA ---------------------------------------------------
-#print(db.schema(),"\n", db.error)
-## ------------------------------------------------------------------
+### OBTENER SCHEMA ---------------------------------------------------
+#from mt_sqlite import *           # import la librería
+#DBName  = "example.db"            # Nombre de la base de datos
+#db = DBSqlite(DBName)             # Instancia de la clase
+#print(db.schema(),"\n", db.error) # Obtener el schema de la base de datos
+#                                  # Imprime schema e imprime error
+### ------------------------------------------------------------------
 
 ### INSERT from CSV -------------------------------------------------
-#db.insertFromCSV("person","tabla.csv", cab = True)
-#print(db.error)
+#from mt_sqlite import *           # import la librería
+#DBName  = "example.db"            # Nombre de la base de datos
+#db = DBSqlite(DBName)             # Instancia de la clase
+#db.insertFromCSV("person","tabla.csv", cab = True) # Ejecutar INSERT a una tabla desde csv
+#print(db.error)                   # Imprime error
 ### -----------------------------------------------------------------
 
 ### EJECUTAR UN SCRIPT-----------------------------------------------
@@ -34,43 +41,54 @@ db = DBSqlite(DBName)
 ### -----------------------------------------------------------------
 
 ####  SELECT --------------------------------------------------------
-#sql = 'SELECT * FROM address'
-#res = db.execQuery(sql, cab=True)
-#print(res, db.error)
+#from mt_sqlite import *            # import la librería
+#DBName  = "example.db"             # Nombre de la base de datos
+#db = DBSqlite(DBName)              # Instancia de la clase
+#sql = 'SELECT * FROM address'      # String con la consulta
+#res = db.execQuery(sql, cab=True)  # Ejecutar la consulta
+#print(db.schema(),"\n", db.error)  # Imprime el resultado de la consulta y el error
+#
 #### ----------------------------------------------------------------
 
 ####  CONVERTIR A CSV------------------------------------------------
 ## Convierte a CSV una lista de tuplas que
 ## contiene el contenido de la tabla
-#sql = 'SELECT * FROM address'
-#res = db.execQuery(sql, cab=True)
+#from mt_sqlite import *              # import la librería
+#DBName  = "example.db"               # Nombre de la base de datos
+#db = DBSqlite(DBName)                # Instancia de la clase
+#sql = 'SELECT * FROM address'        # String con la consulta
+#res = db.execQuery(sql, cab=True)    # Ejecutar la consulta
 #print(res,"\n", "Error: ",db.error)
-#print(toCSVstr(res)) 
-#### ----------------------------------------------------------------
+#print(toCSVstr(res))                 # Convierte el resultado de la consulta a un sgring CSV
+##### ----------------------------------------------------------------
 
 ######  CONVERTIR A CSV-----------------------------------------------
 ### CSV, DICT, JSON
-#
-#miTabla = "person"
-#sql = 'SELECT * FROM {}'.format(miTabla)
-#
-#print("--LISTA DE TUPLAS, resultado de una consulta --")
-#res = db.execQuery(sql, cab=True)
-#print(res,"\n", "Error: ",db.error,"\n")
-#
-#print("--Convertir a CSV desde una lista de tuplas --")
-#strCSV = toCSVstr(res)
-#print(type(strCSV),"\n",strCSV,"\n")
-#
-#dicData = toDictPy(res,miTabla)
-#print("--Convertir a DICCIONARIO desde una lista de tuplas --")
-#print(type(dicData),"\n",dicData,"\n")
-#
-#print("--Convertir a JSON desde un Diccionario 'Codificacion'--")
+##
+#from mt_sqlite import *                    # import la librería
+#DBName  = "example.db"                     # Nombre de la base de datos
+#db = DBSqlite(DBName)                      # Instancia de la clase
+##
+#miTabla = "person"                         # string con el nombre de la tabla
+#sql = 'SELECT * FROM {}'.format(miTabla)   # string con la consulta
+##
+##print("--LISTA DE TUPLAS, resultado de una consulta --")
+#res = db.execQuery(sql, cab=True)          # Ejecutar consulta
+##print(res,"\n", "Error: ",db.error,"\n")
+##
+##print("--Convertir a CSV desde una lista de tuplas --")
+##strCSV = toCSVstr(res)
+##print(type(strCSV),"\n",strCSV,"\n")
+##
+#dicData = toDictPy(res,miTabla)            # Convertir Lista de tuplas de consulta, a dict python
+##print("--Convertir a DICCIONARIO desde una lista de tuplas --")
+##print(type(dicData),"\n",dicData,"\n")     # Imprimir tipo, y diccionario
+##
+##print("--Convertir a JSON desde un Diccionario 'Codificacion'--")
 #strJsonData = toJsonEncode(dicData)
-#print(type(strJsonData),"\n",strJsonData,"\n")
-#
-#print("-- Convertir a DICCIONARIO desde un json 'Decodificacion'--")
+##print(type(strJsonData),"\n",strJsonData,"\n")
+##
+##print("-- Convertir a DICCIONARIO desde un json 'Decodificacion'--")
 #dicJsonData= toJsonDecode(strJsonData)
 #print(type(dicJsonData),"\n",dicJsonData,"\n")
 #
@@ -92,11 +110,15 @@ db = DBSqlite(DBName)
 #print(res)
 ## -------------------------------------
 
-### DELETE -----------------------------
-#sql = "DELETE from address where id =22"
-#res = db.transQuery(sql)
-#print(res)
-## -------------------------------------
+#### DELETE -----------------------------
+#from mt_sqlite import *                  # import la librería
+#DBName  = "example.db"                   # Nombre de la base de datos
+#db = DBSqlite(DBName)                    # Instancia de la clase
+#sql = "DELETE from address where id =22" # String con la consulta
+#res = db.transQuery(sql)                 # Ejecutar consulta (Transaccion)
+#print(res,"\n", "Error: ",db.error)      # imprimir resultado y error
+#
+### -------------------------------------
 
 #### UPDATE ----------------------------
 #sql="UPDATE address SET street_name='pythoncentrallllll' WHERE id='6'"

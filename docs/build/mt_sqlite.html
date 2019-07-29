@@ -1,0 +1,582 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mt_sqlite module &mdash; mtpy-projet 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mtpy-projet
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">mt_sqlite module</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mtpy-projet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>mt_sqlite module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/mt_sqlite.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mt_sqlite">
+<span id="mt-sqlite-module"></span><h1>mt_sqlite module<a class="headerlink" href="#module-mt_sqlite" title="Permalink to this headline">¶</a></h1>
+<p>El modulo ‘mt_sqlite.py’ contiene clases para acceder     a la base de datos sqlite, para realizar operaciones (CRUD).</p>
+<dl class="docutils">
+<dt>Sobre la BD:</dt>
+<dd>Soporta (DML) -&gt; select, insert, delete, update.         Soporta (DDL) -&gt; create, alter, drop.         Soporta ejecutar script.     Ademas contiene funciones para conversion a CSV, JSON, DICT.</dd>
+<dt>Utiliza las librerias:</dt>
+<dd>‘pymysql’
+‘json’</dd>
+</dl>
+<dl class="class">
+<dt id="mt_sqlite.DBSqlite">
+<em class="property">class </em><code class="descclassname">mt_sqlite.</code><code class="descname">DBSqlite</code><span class="sig-paren">(</span><em>DBName</em><span class="sig-paren">)</span><a class="headerlink" href="#mt_sqlite.DBSqlite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p class="rubric">Examples</p>
+<p>Intancia de la clase. Se le pasa por parámetro el nombre de la          base de datos. Si no existe, entonces la crea y conecta; y si existe         entonces conecta. Se asigna en db el objeto conección.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mt_sqlite</span> <span class="k">import</span> <span class="o">*</span>     <span class="c1"># import la librería</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">DBName</span>  <span class="o">=</span> <span class="s2">&quot;example.db&quot;</span>      <span class="c1"># Nombre de la base de datos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">DBSqlite</span><span class="p">(</span><span class="n">DBName</span><span class="p">)</span>       <span class="c1"># Instancia de la clase</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="mt_sqlite.DBSqlite.closeConnDB">
+<code class="descname">closeConnDB</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mt_sqlite.DBSqlite.closeConnDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cierra la conección a la base de datos.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mt_sqlite.DBSqlite.connDB">
+<code class="descname">connDB</code><em class="property"> = None</em><a class="headerlink" href="#mt_sqlite.DBSqlite.connDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>contiene el objeto conección a la base de datos.                      Su valor por defecto connDB=None.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">connDB(obj)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mt_sqlite.DBSqlite.error">
+<code class="descname">error</code><em class="property"> = None</em><a class="headerlink" href="#mt_sqlite.DBSqlite.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>contiene el objeto error. Su valor por defecto error=None.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">error(obj)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mt_sqlite.DBSqlite.execQuery">
+<code class="descname">execQuery</code><span class="sig-paren">(</span><em>sql</em>, <em>cab=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mt_sqlite.DBSqlite.execQuery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ejecuta una consulta SELECT y retorna el contenido de la         respuesta a la consulta.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sql</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String que contiene la consulta sql a ejecutar.</li>
+<li><strong>cab</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Si cab=True, indica que la consulta trae la
+cabecera (es decir los nombres de las columnas).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Retorna un lista de tuplas con el contenido                             de la respuesta de la consulta. Para cab=True,                             incluye el contenido del nombre de las columnas                             en la primer tupla.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">res([(<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)">tuple</a>)])</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Retorna -1 si hay error.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">res(<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mt_sqlite</span> <span class="k">import</span> <span class="o">*</span>            <span class="c1"># import la librería</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">DBName</span>  <span class="o">=</span> <span class="s1">&#39;example.db&#39;</span>             <span class="c1"># Nombre de la base de datos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">DBSqlite</span><span class="p">(</span><span class="n">DBName</span><span class="p">)</span>              <span class="c1"># Instancia de la clase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM address&#39;</span>      <span class="c1"># String con la consulta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execQuery</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">cab</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Ejecutar la consulta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">error</span><span class="p">)</span>          <span class="c1"># Imprime el resultado de la consulta y el error</span>
+<span class="go">[(&#39;id&#39;, &#39;street_name&#39;, &#39;street_number&#39;, &#39;post_code&#39;, &#39;person_id&#39;),</span>
+<span class="go">(1, &#39;python road&#39;, &#39;1&#39;, &#39;00000&#39;, 1), (2, &#39;blblblbl&#39;, &#39;1&#39;, &#39;2222&#39;, 2),</span>
+<span class="go">(6, &#39;pythoncentrallllll&#39;, &#39;11&#39;, &#39;1221&#39;, 14), (12, &#39;blblblbl&#39;, &#39;1&#39;, &#39;2222&#39;, 2),</span>
+<span class="go">(22, &#39;blblblbl&#39;, &#39;1&#39;, &#39;2222&#39;, 2)]</span>
+<span class="go">None</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="mt_sqlite.DBSqlite.execScript">
+<code class="descname">execScript</code><span class="sig-paren">(</span><em>strScript</em><span class="sig-paren">)</span><a class="headerlink" href="#mt_sqlite.DBSqlite.execScript" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ejecuta un sript en la base de datos.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>strScript</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String que contiene el script a ejecutar.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mt_sqlite.DBSqlite.execScriptFromFile">
+<code class="descname">execScriptFromFile</code><span class="sig-paren">(</span><em>fileName</em><span class="sig-paren">)</span><a class="headerlink" href="#mt_sqlite.DBSqlite.execScriptFromFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ejecuta un sript en la base de datos, desde un archivo.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String que contiene en nombre del archivo                            a ejecutar.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Se ejecuta el script ‘example_script.sql’ que contiene la secuencia             sql para crear las tablas, agregarle las claves, insertar datos.
+La ejecución del script se hace sobre la base de datos conectada.
+execScriptFromFile dejará en error, la información del error ocurrido,             que para el caso en None, por no haber error.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mt_sqlite</span> <span class="k">import</span> <span class="o">*</span>           <span class="c1"># import la librería</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">DBName</span>  <span class="o">=</span> <span class="s2">&quot;example.db&quot;</span>            <span class="c1"># Nombre de la base de datos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">DBSqlite</span><span class="p">(</span><span class="n">DBName</span><span class="p">)</span>             <span class="c1"># Instancia de la clase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">execScriptFromFile</span><span class="p">(</span><span class="s2">&quot;example_script.sql&quot;</span><span class="p">)</span>  <span class="c1"># Ejecutar script</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">error</span><span class="p">)</span>                   <span class="c1"># Imprimir error</span>
+<span class="go">None</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="mt_sqlite.DBSqlite.insertFromCSV">
+<code class="descname">insertFromCSV</code><span class="sig-paren">(</span><em>tableName</em>, <em>fileName</em>, <em>cab=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mt_sqlite.DBSqlite.insertFromCSV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ejecuta un sript en la base de datos, desde un archivo.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>tableName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String que contiene el nombre de la tabla donde                             se ejecutaran los instert que se encuentran en fileName.</li>
+<li><strong>fileName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String que contiene en nombre del archivo a ejecutar.</li>
+<li><strong>cab</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – Booleana que indica en True si el csv contiene los nombre                        de las columnas.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>En el archvio csv se encuentra la informacion de los valores de cada registro             separado por coma. insertFromCSV toma los valores y los convierte en un secuencia sql.             El primer parametro ‘person’ indica el nombre de la tabla donde se harán los insert.             Si hay error, se indicará en la variable error.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mt_sqlite</span> <span class="k">import</span> <span class="o">*</span>           <span class="c1"># import la librería</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">DBName</span>  <span class="o">=</span> <span class="s2">&quot;example.db&quot;</span>            <span class="c1"># Nombre de la base de datos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">DBSqlite</span><span class="p">(</span><span class="n">DBName</span><span class="p">)</span>             <span class="c1"># Instancia de la clase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">insertFromCSV</span><span class="p">(</span><span class="s2">&quot;person&quot;</span><span class="p">,</span><span class="s2">&quot;tabla.csv&quot;</span><span class="p">,</span> <span class="n">cab</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># Ejecutar INSERT desde csv</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">error</span><span class="p">)</span>                   <span class="c1"># Imprime error</span>
+<span class="go">None</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="mt_sqlite.DBSqlite.openConnDB">
+<code class="descname">openConnDB</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mt_sqlite.DBSqlite.openConnDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conecta a una base de datos y retorna el objeto de conección.
+Si no existe BD =&gt; la crea y conecta.
+Si existe       =&gt; conecta.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Retorna el objeto coneccion a la base de datos,                     si la coneccion es exitosa.
+(None): Retorna None si la coneccion NO es exitosa.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(obj)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mt_sqlite.DBSqlite.schema">
+<code class="descname">schema</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mt_sqlite.DBSqlite.schema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retorna una secuencia de tuplas, donde por cada tabla se          muestra el sql necesario          para crear dicha tabla, incluyendo indice, claves.</p>
+<p class="rubric">Examples</p>
+<p>Se imprime el schema de la base de datos conectada.              Imprime None, si no hubo error.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mt_sqlite</span> <span class="k">import</span> <span class="o">*</span>             <span class="c1"># import la librería</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">DBName</span>  <span class="o">=</span> <span class="s1">&#39;example.db&#39;</span>              <span class="c1"># Nombre de la base de datos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">DBSqlite</span><span class="p">(</span><span class="n">DBName</span><span class="p">)</span>               <span class="c1"># Instancia de la clase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">schema</span><span class="p">(),</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">error</span><span class="p">)</span>  <span class="c1"># Obtener el schema de la base de datos</span>
+<span class="go">                                        # Imprime schema e imprime error</span>
+<span class="go">[(&#39;address&#39;, &#39;CREATE TABLE address (id INTEGER PRIMARY KEY ASC, street_name varchar(250),</span>
+<span class="go">street_number varchar(250), post_code varchar(250) NOT NULL, person_id INTEGER NOT NULL,</span>
+<span class="go">FOREIGN KEY(person_id) REFERENCES person(id))&#39;), (&#39;person&#39;, &#39;CREATE TABLE person</span>
+<span class="go">(id INTEGER PRIMARY KEY ASC, name varchar(250) NOT NULL)&#39;)]</span>
+<span class="go">None</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="mt_sqlite.DBSqlite.transQuery">
+<code class="descname">transQuery</code><span class="sig-paren">(</span><em>sql</em><span class="sig-paren">)</span><a class="headerlink" href="#mt_sqlite.DBSqlite.transQuery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ejecuta una consulta INSERT, UPDATE, DELETE, CREATE,DROP.
+Retorna la informacion sobre el estado de la accion, es decir
+sobre la cantidad de registros afectados.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sql</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String con la consulta sql a ejecutar.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna un entero n &gt; 0 si ha ejecutado efectivamente                       sobre n registros el INSERT o el UPDATE o el DELETE.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">res(<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna <em>0</em> si se realizó con exito el CREATE o                       el DROP o el etc.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">res(<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna <em>-1</em> si hubo algún error.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">res(<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a>)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Un ejemplo con un DELETE. Retorna la cnatidad de filas afectadas.             La ejecución se realiza dentro de una transacción.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mt_sqlite</span> <span class="k">import</span> <span class="o">*</span>                  <span class="c1"># import la librería</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">DBName</span>  <span class="o">=</span> <span class="s2">&quot;example.db&quot;</span>                   <span class="c1"># Nombre de la base de datos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">DBSqlite</span><span class="p">(</span><span class="n">DBName</span><span class="p">)</span>                    <span class="c1"># Instancia de la clase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;DELETE from address where id =22&quot;</span> <span class="c1"># String con la consulta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">transQuery</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>                 <span class="c1"># Ejecutar consulta (Transaccion)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;Error: &quot;</span><span class="p">,</span><span class="n">db</span><span class="o">.</span><span class="n">error</span><span class="p">)</span>      <span class="c1"># imprimir resultado y error</span>
+<span class="go">1</span>
+<span class="go">Error:  None</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mt_sqlite.toCSVstr">
+<code class="descclassname">mt_sqlite.</code><code class="descname">toCSVstr</code><span class="sig-paren">(</span><em>lst</em>, <em>sep='</em>, <em>'</em><span class="sig-paren">)</span><a class="headerlink" href="#mt_sqlite.toCSVstr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retorna un string con formato CSV, con el contenido la lista lst.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lst</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – Lista de tuplas que proviene de una consulta.</li>
+<li><strong>sep</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – <p>String que contiene el separador a aplicar entre campos.</p>
+<p>Note: El valor por defecto sep = ‘,’ .</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mt_sqlite</span> <span class="k">import</span> <span class="o">*</span>              <span class="c1"># import la librería</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">DBName</span>  <span class="o">=</span> <span class="s2">&quot;example.db&quot;</span>               <span class="c1"># Nombre de la base de datos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">DBSqlite</span><span class="p">(</span><span class="n">DBName</span><span class="p">)</span>                <span class="c1"># Instancia de la clase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM address&#39;</span>        <span class="c1"># String con la consulta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execQuery</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">cab</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    <span class="c1"># Ejecutar la consulta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">toCSVstr</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>                 <span class="c1"># Convierte el resultado de la consulta a un sgring CSV</span>
+<span class="go">id,street_name,street_number,post_code,person_id</span>
+<span class="go">1,python road,1,00000,1</span>
+<span class="go">2,blblblbl,1,2222,2</span>
+<span class="go">6,pythoncentrallllll,11,1221,14</span>
+<span class="go">12,blblblbl,1,2222,2</span>
+<span class="go">22,blblblbl,1,2222,2</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mt_sqlite.toDictPy">
+<code class="descclassname">mt_sqlite.</code><code class="descname">toDictPy</code><span class="sig-paren">(</span><em>lst</em>, <em>strNomObjeto='NomObj'</em><span class="sig-paren">)</span><a class="headerlink" href="#mt_sqlite.toDictPy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retorna un dictionario, con el contenido la lista de tuplas ‘lst’ .
+La tupla 0 (primero) contiene los nombres de las columnas.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lst</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a>) – Lista de tuplas que proviene de una consulta.</li>
+<li><strong>strNomObjeto</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String que contiene el nombre del objeto json a crear.
+El valor por defecto strNomObjeto = ‘NomObj’.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mt_sqlite</span> <span class="k">import</span> <span class="o">*</span>                    <span class="c1"># import la librería</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">DBName</span>  <span class="o">=</span> <span class="s2">&quot;example.db&quot;</span>                     <span class="c1"># Nombre de la base de datos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">DBSqlite</span><span class="p">(</span><span class="n">DBName</span><span class="p">)</span>                      <span class="c1"># Instancia de la clase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">miTabla</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span>                         <span class="c1"># string con el nombre de la tabla</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">miTabla</span><span class="p">)</span>   <span class="c1"># string con la consulta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execQuery</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">cab</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>          <span class="c1"># Ejecutar consulta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dicData</span> <span class="o">=</span> <span class="n">toDictPy</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">miTabla</span><span class="p">)</span>            <span class="c1"># Convertir Lista de tuplas de consulta, a dict python</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">dicData</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">dicData</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>     <span class="c1"># Imprimir tipo, y diccionario</span>
+<span class="go">&lt;class &#39;dict&#39;&gt;</span>
+<span class="go"> {&#39;person&#39;: [{&#39;id&#39;: 1, &#39;name&#39;: &#39;pythoncentral&#39;}]}</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mt_sqlite.toJsonDecode">
+<code class="descclassname">mt_sqlite.</code><code class="descname">toJsonDecode</code><span class="sig-paren">(</span><em>strData</em><span class="sig-paren">)</span><a class="headerlink" href="#mt_sqlite.toJsonDecode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retorna un diccionario (Python) con el contenido json pasado por parametro.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>strData</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Recibe un “string” con contenido en formato json.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mt_sqlite</span> <span class="k">import</span> <span class="o">*</span>                    <span class="c1"># import la librería</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">DBName</span>  <span class="o">=</span> <span class="s2">&quot;example.db&quot;</span>                     <span class="c1"># Nombre de la base de datos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">DBSqlite</span><span class="p">(</span><span class="n">DBName</span><span class="p">)</span>                      <span class="c1"># Instancia de la clase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">miTabla</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span>                         <span class="c1"># string con el nombre de la tabla</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">miTabla</span><span class="p">)</span>   <span class="c1"># string con la consulta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execQuery</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">cab</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>          <span class="c1"># Ejecutar consulta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dicData</span> <span class="o">=</span> <span class="n">toDictPy</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">miTabla</span><span class="p">)</span>            <span class="c1"># Convertir Lista de tuplas de consulta, a dict python</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">strJsonData</span> <span class="o">=</span> <span class="n">toJsonEncode</span><span class="p">(</span><span class="n">dicData</span><span class="p">)</span>        <span class="c1"># Convertir Dict a str con formato json</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">strJsonData</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">strJsonData</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1"># Imprimir tipo, y str con formato json</span>
+<span class="go">&lt;class &#39;str&#39;&gt;</span>
+<span class="go"> {&quot;person&quot;: [{&quot;id&quot;: 1, &quot;name&quot;: &quot;pythoncentral&quot;}]}</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<p>Comprobar json en: <a class="reference external" href="http://json2table.com/">http://json2table.com/</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mt_sqlite.toJsonEncode">
+<code class="descclassname">mt_sqlite.</code><code class="descname">toJsonEncode</code><span class="sig-paren">(</span><em>dicData</em><span class="sig-paren">)</span><a class="headerlink" href="#mt_sqlite.toJsonEncode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retorna un “string” con el contenido de dicData en formato json</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dicData</strong> (<em>Dict</em>) – Recibe un diccionario (Python) con un elemento que contiene
+una lista, donde cada elemento de la lista es un diccionario
+cuyas claves son las columnas, y sus valores son
+“los valores” de cada campo.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mt_sqlite</span> <span class="k">import</span> <span class="o">*</span>                    <span class="c1"># import la librería</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">DBName</span>  <span class="o">=</span> <span class="s2">&quot;example.db&quot;</span>                     <span class="c1"># Nombre de la base de datos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">DBSqlite</span><span class="p">(</span><span class="n">DBName</span><span class="p">)</span>                      <span class="c1"># Instancia de la clase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">miTabla</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span>                         <span class="c1"># string con el nombre de la tabla</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">miTabla</span><span class="p">)</span>   <span class="c1"># string con la consulta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execQuery</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">cab</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>          <span class="c1"># Ejecutar consulta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dicData</span> <span class="o">=</span> <span class="n">toDictPy</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">miTabla</span><span class="p">)</span>            <span class="c1"># Convertir Lista de tuplas de consulta, a dict python</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">strJsonData</span> <span class="o">=</span> <span class="n">toJsonEncode</span><span class="p">(</span><span class="n">dicData</span><span class="p">)</span>        <span class="c1"># Convertir Dict a str con formato json</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dicJsonData</span><span class="o">=</span> <span class="n">toJsonDecode</span><span class="p">(</span><span class="n">strJsonData</span><span class="p">)</span>     <span class="c1"># Convertir str con formato json a Dict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">dicJsonData</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">dicJsonData</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1"># Imprimir tipo, y diccionario</span>
+<span class="go">&lt;class &#39;dict&#39;&gt;</span>
+<span class="go"> {&#39;person&#39;: [{&#39;id&#39;: 1, &#39;name&#39;: &#39;pythoncentral&#39;}]}</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<p>Comprobar json en: <a class="reference external" href="http://json2table.com/">http://json2table.com/</a></p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Mariano Trigila
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
